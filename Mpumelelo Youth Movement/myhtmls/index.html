@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mpumelelo Youth Movement</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #1e2a32;
+      color: #f9f5f2;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+        width: 60px;       /* same width as the SVG */
+  height: 60px;      /* same height */
+  border-radius: 50%; /* make it circular, like the SVG */
+  background-color: #f9f5f2; /* same fill */
+  border: 2px solid #4A6FA5; /* same stroke */
+  object-fit: cover; /* make sure image fits nicely */
+  display: inline-block;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: #f9f5f2;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav ul li a:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: #fff;
+      background: none;
+      border: none;
+      padding: 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+    }
+
+    .slideshow img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      user-select: none;
+    }
+
+    .slideshow img.active {
+      opacity: 1;
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      transform: translateY(-50%);
+      background-color: rgba(20, 30, 40, 0.95);
+      color: #fff;
+      padding: 30px;
+      max-width: 400px;
+      border: 2px solid #f9f5f2;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-content h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+      color: #ccc;
+      margin: 15px 0;
+      line-height: 1.6;
+    }
+
+    .underline {
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: #f0d9c3;
+      margin: 15px 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #4A6FA5, #667eea);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      margin-top: 15px;
+    }
+
+    .cta-button:hover {
+      background: transparent;
+      border-color: #4A6FA5;
+      color: #4A6FA5;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(74, 111, 165, 0.3);
+    }
+
+    .about-section {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(20, 30, 40, 0.95), rgba(30, 40, 50, 0.95));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 5%;
+    }
+
+    .about-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      color: #fff;
+      padding: 50px;
+      max-width: 700px;
+      border-radius: 20px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1.2s ease;
+      position: absolute;
+    }
+
+    .about-card.active {
+      opacity: 1;
+      transform: translateY(0);
+      position: relative;
+    }
+
+    .about-card h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .arrow:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow.left {
+      left: 30px;
+    }
+
+    .arrow.right {
+      right: 30px;
+    }
+
+    .services-section {
+      padding: 80px 20px;
+      background: linear-gradient(135deg, rgba(30, 40, 50, 0.95), rgba(40, 50, 60, 0.95));
+      color: white;
+      text-align: center;
+    }
+
+    .services-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+    }
+
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+        column-gap: 40px;
+    }
+
+    .service {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .service img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .contributors-section {
+      background: linear-gradient(135deg, rgba(40, 50, 60, 0.95), rgba(50, 60, 70, 0.95));
+      padding: 80px 25px;
+      text-align: center;
+      color: white;
+    }
+
+    .contributors-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+    }
+.contributors-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.contributor-card {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  min-height: 220px;
+}
+
+    .contributor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .contributor-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    .contributor-details {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+    .contributor-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .contributor-title {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .contributor-contact {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .contributor-contact i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .contact {
+      background: linear-gradient(135deg, rgba(50, 60, 70, 0.95), rgba(60, 70, 80, 0.95));
+      color: white;
+      padding: 80px 20px;
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .contact-info p {
+      margin: 10px 0;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #4A6FA5;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .contact-form button {
+      background: linear-gradient(135deg, #4A6FA5, #667eea);
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(74, 111, 165, 0.3);
+    }
+.gallery {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+.more-btn {
+  background: linear-gradient(135deg, #4A6FA5, #667eea);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.6s ease; /* Slower hover effect */
+  text-decoration: none;
+}
+
+.more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(74, 111, 165, 0.3);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 2s cubic-bezier(0.4, 0.2, 0.2, 1); /* Much slower flip */
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.flip-card-front {
+  background-color: #fff;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.flip-card-back {
+  background: linear-gradient(135deg, #4A6FA5, #667eea);
+  color: white;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 1.5s ease; /* Slower fade-in of content */
+}
+
+.flip-card-back h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.flip-card-back p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        padding: 10px 20px;
+      }
+
+      .logo-container {
+        order: 1;
+        flex: 1;
+      }
+
+      .menu-toggle {
+        display: block;
+        order: 2;
+      }
+
+      nav {
+        order: 3;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      nav.active {
+        max-height: 400px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 20px 0;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        padding: 15px 20px;
+        width: 100%;
+        justify-content: flex-start;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-content {
+        width: 90%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: none;
+      }
+
+      .hero-content h2 {
+        font-size: 24px;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .contributor-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .contributor-photo {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+
+      .gallery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, #4A6FA5, #667eea);
+      z-index: 1001;
+      transition: width 0.3s ease;
+    }
+
+    /* Loading animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .contributor-contact a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contributor-contact a:hover {
+  color: #f0d9c3; /* Use the same color as your underline element */
+  text-decoration: underline;
+}
+.pdf-wrapper {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  /* Resizable Window */
+  .pdf-window {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-width: 800px;
+    min-height: 300px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    resize: both;       /* allow resizing */
+  }
+
+  /* Draggable Header */
+  .pdf-header {
+    background: #222;
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
+  }
+
+  .close-btn {
+    background: #e74c3c;
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .close-btn:hover {
+    background: #c0392b;
+  }
+
+  /* PDF area */
+  .pdf-box {
+    flex: 1;
+    position: relative;
+    resize: both;
+  }
+
+  .pdf-box object {
+    width: 100%;
+    height: 100%;
+    border: none;
+     resize: both; 
+  }
+/*width: 300px;
+  height: 200px;
+  border: 2px solid #4A6FA5;
+  padding: 10px;
+  overflow: auto;   /* Required for resize to work */
+    /* Allow resizing */
+  /* Overlay only in the top-right corner where download button usually is */
+  .pdf-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;    /* adjust width if needed */
+    height: 40px;   /* toolbar height */
+    background: transparent;
+    cursor: not-allowed;
+  }
+
+  /* Button styling */
+  .toolkit-btn {
+    padding: 12px 20px;
+    background: #3498db;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .toolkit-btn:hover {
+    background: #2980b9;
+  }
+  </style>
+</head>
+<body>
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" id="scrollIndicator"></div>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo">
+        <img src="C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\logo.png" alt="MYM Logo">
+      </div>
+      <h1>Mpumelelo Youth Movement</h1>
+    </div>
+    
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="nav">
+      <ul>
+        <li><a href="#home"><i class="fas fa-home"></i> <span>Home</span></a></li>
+        <li><a href="#about"><i class="fas fa-info-circle"></i> <span>About</span></a></li>
+        <li><a href="#services"><i class="fas fa-concierge-bell"></i> <span>Services</span></a></li>
+        <li><a href="#contributors"><i class="fas fa-handshake"></i> <span>Contributors</span></a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+        <li><a href="#photos"><i class="fas fa-images"></i> <span>Gallery</span></a></li>
+        <li><a href="donate.html" ><i class="fas fa-donate"></i> <span>Donate</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero" onclick="nextSlide()">
+    <div class="slideshow">
+      <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pic1.jpg" alt="Youth Empowerment">
+       <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pic2.jpg" alt="Youth Empowerment">
+       <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pic3.jpg"alt="Youth Empowerment">
+      
+
+       </div>
+    
+    <div class="hero-content">
+      <h2>Welcome to Mpumelelo Youth Movement</h2>
+      <h2>Empowering<br>Communities</h2>
+      <span class="underline"></span>
+      <p>Join us in our mission to empower youth and make a positive impact in their lives through education, mentorship, and community support.</p>
+      <a href="#contact" class="cta-button">Get Involved</a>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="arrow left" onclick="prevAbout()" aria-label="Previous">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    
+    <div class="about-card active">
+      <h2>About Us</h2>
+      <div class="underline"></div>
+      <p>We are a dedicated non-profit organization focused on uplifting communities, advocating for social justice, and providing resources to empower individuals. Our mission is to act as a catalyst for positive change by fostering opportunities and creating lasting partnerships.</p>
+    </div>
+    
+    <div class="about-card">
+      <h2>Our Vision</h2>
+      <div class="underline"></div>
+      <p>To build a world where every young person is equipped with the tools, knowledge, and support they need to achieve their full potential, regardless of their background or circumstances.</p>
+    </div>
+    
+    <div class="about-card">
+      <h2>Our Work</h2>
+      <div class="underline"></div>
+      <p>We implement educational programs, mentorship initiatives, community outreach, and development workshops to help youth navigate challenges and unlock opportunities.</p>
+    </div>
+    
+    <div class="about-card">
+      <h2>Get Involved</h2>
+      <div class="underline"></div>
+      <p>Partner with us, volunteer, donate, or spread the word. Your support directly contributes to changing lives and building stronger communities.</p>
+    </div>
+    
+    <div class="arrow right" onclick="nextAbout()" aria-label="Next">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </section>
+
+  <section class="services-section" id="services">
+    <h2>Services</h2>
+    <div class="services-container">
+      <div class="service">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%234A6FA5'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E🤝%3C/text%3E%3C/svg%3E" alt="Community Outreach" />
+        <h3>Community Outreach</h3>
+        <p>Providing essential resources and services to underserved communities, ensuring everyone has an opportunity to thrive.</p>
+      </div>
+      <div class="service">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%23667eea'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E📚%3C/text%3E%3C/svg%3E" alt="Education Initiatives" />
+        <h3>Education Initiatives</h3>
+        <p>Promoting access to education through programs, scholarships, and resources tailored to learning innovation.</p>
+
+
+</div>
+      </div>
+
+      <div class="service">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%23f093fb'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E👥%3C/text%3E%3C/svg%3E" alt="Mentorship" />
+        <h3>Mentorship Programs</h3>
+        <p>Connecting youth with mentors who can provide guidance and support, helping them navigate challenges and achieve their full potential.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contributors-section" id="contributors">
+    <h2>Contributors</h2>
+    
+    <div class="contributors-container">
+      <div class="contributor-card">
+        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\spu.jpeg"alt="Sol Plaatje University" class="contributor-photo" >
+        <div class="contributor-details">
+          <div class="contributor-name">Sol Plaatje University</div>
+          <div class="contributor-title">Local University</div>
+          <div class="contributor-contact">
+            <i class="fas fa-envelope"></i>information@spu.ac.za
+          </div>
+          <div class="contributor-contact">
+            <i class="fas fa-phone"></i> 053 491 0000
+          </div>
+        </div>
+      </div>
+      
+      <div class="contributor-card">
+        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\presidency.png"alt="Presidential" class="contributor-photo">
+        <div class="contributor-details">
+          <div class="contributor-name"> Presidential Stimulus Fund</div>
+          <div class="contributor-title">Government Agency</div>
+          <div class="contributor-contact">
+      <i class="fas fa-link"></i> <a href="https://www.thepresidency.gov.za" target="_blank">https://www.thepresidency.gov.za</a>
+          </div>
+          
+        </div>
+      </div>
+      
+        <div class="contributor-card">
+        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\ASSITEJ.webp" alt="Assitej" class="contributor-photo" >
+        <div class="contributor-details">
+          <div class="contributor-name">Assitej (SA)</div>
+          <div class="contributor-title">International NGO</div>
+          <div class="contributor-contact">
+            <i class="fas fa-envelope"></i>finops@assitej.org.za
+          </div>
+          <div class="contributor-contact">
+            <i class="fas fa-phone"></i>+27 73 589 2305 
+              <i class="fas fa-link"></i> <a href="https://assitej-international.org" target="_blank">https://assitej-international.org</a>
+       
+          </div>
+        </div>
+      </div>
+      <div class="contributor-card">
+        <img src="C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\kagiso trust.png" alt="Kagiso Trust" class="contributor-photo">
+        <div class="contributor-details">
+          <div class="contributor-name">Kagiso Trust</div>
+          <div class="contributor-title">Development Agency</div>
+          <div class="contributor-contact">
+            <i class="fas fa-envelope"></i> info@kagiso.co.za
+          </div>
+          <div class="contributor-contact">
+            <i class="fas fa-phone"></i>011 566 1900
+          </div>
+        </div>
+      </div>
+      
+      <div class="contributor-card">
+        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pioneers Of change.png" alt="Pioneers Of Change" class="contributor-photo">
+        <div class="contributor-details">
+          <div class="contributor-name">Pioneers Of Change</div>
+          <div class="contributor-title">Students From Sol Plaatje University</div>
+          <div class="contributor-contact">
+            <i class="fas fa-envelope"></i> pioneersofchange@gmail.com
+          </div>
+          <div class="contributor-contact">
+            <i class="fas fa-phone"></i> 071 544 1437
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p><i class="fas fa-envelope"></i> mymovementsa@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +27 60 439 4410</p>
+        <p><i class="fas fa-map-marker-alt"></i> 13214 Thutlo Street</p>
+        <p>Bloemanda</p>
+        <p>Kimberley, South Africa</p>
+        <p>8345</p>
+      </div>
+      <form class="contact-form" action="https://formsubmit.co/202340368@spu.ac.za" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="tel" name="phone" placeholder="Your Cell Number">
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="gallery" id="photos">
+    <div class="gallery-container">
+      <div class="gallery-header">
+        <h1 class="gallery-title">Media Gallery</h1>
+        <a href="https://www.facebook.com/mymovementsa/about" target="_blank" class="more-btn">
+          <span>View More</span>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250' viewBox='0 0 280 250'%3E%3Cdefs%3E%3ClinearGradient id='arts' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%234A6FA5;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='280' height='250' fill='url(%23arts)'/%3E%3Ctext x='140' y='130' text-anchor='middle' fill='white' font-size='24' font-family='Arial'%3E🎨 Arts%3C/text%3E%3C/svg%3E" alt="Arts and Culture">
+            </div>
+            <div class="flip-card-back">
+              <h3>Arts and Culture</h3>
+              <p>Celebrating creativity and cultural expression through various artistic initiatives and community events.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250' viewBox='0 0 280 250'%3E%3Cdefs%3E%3ClinearGradient id='climate' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2356ab2f;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23a8e6cf;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='280' height='250' fill='url(%23climate)'/%3E%3Ctext x='140' y='120' text-anchor='middle' fill='white' font-size='18' font-family='Arial'%3E🌍 Climate%3C/text%3E%3Ctext x='140' y='145' text-anchor='middle' fill='white' font-size='18' font-family='Arial'%3EChange%3C/text%3E%3C/svg%3E" alt="Climate Change">
+            </div>
+            <div class="flip-card-back">
+              <h3>Climate Change</h3>
+              <p>Environmental awareness programs focused on sustainability and climate action in our communities.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250' viewBox='0 0 280 250'%3E%3Cdefs%3E%3ClinearGradient id='dialogue' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f093fb;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f5576c;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='280' height='250' fill='url(%23dialogue)'/%3E%3Ctext x='140' y='120' text-anchor='middle' fill='white' font-size='16' font-family='Arial'%3E💬 Community%3C/text%3E%3Ctext x='140' y='145' text-anchor='middle' fill='white' font-size='16' font-family='Arial'%3EDialogue%3C/text%3E%3C/svg%3E" alt="Community Dialogue">
+            </div>
+            <div class="flip-card-back">
+              <h3>Community Dialogue</h3>
+              <p>Facilitating meaningful conversations and discussions to address community challenges and opportunities.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250' viewBox='0 0 280 250'%3E%3Cdefs%3E%3ClinearGradient id='education' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF6B6B;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FFE66D;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='280' height='250' fill='url(%23education)'/%3E%3Ctext x='140' y='120' text-anchor='middle' fill='white' font-size='16' font-family='Arial'%3E📚 Educational%3C/text%3E%3Ctext x='140' y='145' text-anchor='middle' fill='white' font-size='16' font-family='Arial'%3ESupport%3C/text%3E%3C/svg%3E" alt="Educational Support">
+            </div>
+            <div class="flip-card-back">
+              <h3>Educational Support</h3>
+              <p>Providing educational resources, tutoring, and academic support to help students achieve their goals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250' viewBox='0 0 280 250'%3E%3Cdefs%3E%3ClinearGradient id='debate' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234ECDC4;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2344A08D;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='280' height='250' fill='url(%23debate)'/%3E%3Ctext x='140' y='130' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E🗣️ Debate%3C/text%3E%3C/svg%3E" alt="Debate">
+            </div>
+            <div class="flip-card-back">
+              <h3>Debate Programs</h3>
+              <p>Fostering critical thinking and public speaking skills through structured debate competitions and workshops.</p>
+            </div>
+          </div>
+        </div>
+
+    
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+  
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Slideshow functionality
+    const slides = document.querySelectorAll('.slideshow img');
+    let slideIndex = 0;
+    
+    function showSlide(i) {
+      slides.forEach((slide, idx) => {
+        slide.classList.remove('active');
+        if (idx === i) slide.classList.add('active');
+      });
+    }
+    
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    // Auto slideshow
+    setInterval(nextSlide, 5000);
+
+    // Menu toggle functionality
+    function toggleMenu() {
+      const nav = document.getElementById("nav");
+      const menuToggle = document.querySelector('.menu-toggle i');
+      
+      nav.classList.toggle("active");
+      
+      // Change icon
+      if (nav.classList.contains('active')) {
+        menuToggle.className = 'fas fa-times';
+      } else {
+        menuToggle.className = 'fas fa-bars';
+      }
+    }
+
+    // About section carousel
+    let currentAbout = 0;
+    const aboutCards = document.querySelectorAll('.about-card');
+    
+    function updateAboutCards() {
+      aboutCards.forEach((card, idx) => {
+        card.classList.remove('active');
+        if (idx === currentAbout) {
+          card.classList.add('active');
+        }
+      });
+    }
+    
+    function nextAbout() {
+      currentAbout = (currentAbout + 1) % aboutCards.length;
+      updateAboutCards();
+    }
+    
+    function prevAbout() {
+      currentAbout = (currentAbout - 1 + aboutCards.length) % aboutCards.length;
+      updateAboutCards();
+    }
+
+    // Auto about carousel
+    setInterval(nextAbout, 7000);
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav ul li a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetID = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetID);
+        
+        if (!targetElement) return;
+
+        // Close mobile menu if open
+        const nav = document.getElementById("nav");
+        const menuToggle = document.querySelector('.menu-toggle i');
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          menuToggle.className = 'fas fa-bars';
+        }
+
+        // Smooth scroll to target
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
+
+    // Scroll indicator
+    function updateScrollIndicator() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+    }
+
+    window.addEventListener('scroll', updateScrollIndicator);
+
+    // Header background on scroll
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(30, 42, 50, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+      } else {
+        header.style.background = '#1e2a32';
+        header.style.backdropFilter = 'none';
+      }
+    });
+
+    // Form submission enhancement
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      const button = this.querySelector('button');
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      button.disabled = true;
+      
+      // Reset after 3 seconds (in case of issues)
+      setTimeout(() => {
+        button.innerHTML = 'Send Message';
+        button.disabled = false;
+      }, 3000);
+    });
+
+    // Donation page function - now shows section
+    function showDonationOptions() {
+      const donationOptions = document.getElementById('donationOptions');
+      donationOptions.style.display = 'block';
+      setTimeout(() => {
+        donationOptions.classList.add('show');
+      }, 100);
+      donationOptions.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showDetails(type) {
+      const detailsSection = document.getElementById('detailsSection');
+      const detailsContent = document.getElementById('detailsContent');
+      
+      let content = '';
+      
+      switch(type) {
+        case 'funds':
+          content = `
+            <h3 class="details-title">💰 Bank Transfer Details</h3>
+            <div class="bank-details">
+              <div class="detail-item">
+                <span class="detail-label">Account Name:</span>
+                <span class="detail-value">Mpumelelo Youth Movement</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Bank Name:</span>
+                <span class="detail-value">First National Bank</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Account Number:</span>
+                <span class="detail-value">1234567890</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Branch Code:</span>
+                <span class="detail-value">250655</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Account Type:</span>
+                <span class="detail-value">Current Account</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Reference:</span>
+                <span class="detail-value">Please include "DONATION" in transfer description</span>
+              </div>
+            </div>
+          `;
+          break;
+        case 'stationery':
+          content = `
+            <h3 class="details-title">📝 Stationery Donation Contact</h3>
+            <div class="contact-details">
+              <div class="detail-item">
+                <span class="detail-label">Coordinator:</span>
+                <span class="detail-value">Sarah Molefe</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Phone:</span>
+                <span class="detail-value">+27 60 439 4410</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value">stationery@mym.org.za</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Office Hours:</span>
+                <span class="detail-value">Monday - Friday, 9 AM - 5 PM</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Needed Items:</span>
+                <span class="detail-value">Notebooks, pens, pencils, markers, paper, folders</span>
+              </div>
+            </div>
+          `;
+          break;
+        case 'cleaning':
+          content = `
+            <h3 class="details-title">🧽 Cleaning Materials Contact</h3>
+            <div class="contact-details">
+              <div class="detail-item">
+                <span class="detail-label">Coordinator:</span>
+                <span class="detail-value">Thabo Mthembu</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Phone:</span>
+                <span class="detail-value">+27 71 544 1437</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value">supplies@mym.org.za</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Office Hours:</span>
+                <span class="detail-value">Monday - Friday, 8 AM - 4 PM</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Needed Items:</span>
+                <span class="detail-value">Disinfectants, soap, sanitizers, toilet paper, towels</span>
+              </div>
+            </div>
+          `;
+          break;
+        case 'other':
+          content = `
+            <h3 class="details-title">📦 Other Items Contact</h3>
+            <div class="contact-details">
+              <div class="detail-item">
+                <span class="detail-label">Coordinator:</span>
+                <span class="detail-value">Nomsa Dlamini</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Phone:</span>
+                <span class="detail-value">+27 53 491 0000</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value">donations@mym.org.za</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Office Hours:</span>
+                <span class="detail-value">Monday - Saturday, 10 AM - 6 PM</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Accepted Items:</span>
+                <span class="detail-value">Clothing, blankets, non-perishable food, electronics, books</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Note:</span>
+                <span class="detail-value">Please call ahead for large donations or special items</span>
+              </div>
+            </div>
+          `;
+          break;
+      }
+      
+      detailsContent.innerHTML = content;
+      detailsSection.style.display = 'block';
+      setTimeout(() => {
+        detailsSection.classList.add('show');
+      }, 100);
+      detailsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function hideDetails() {
+      const detailsSection = document.getElementById('detailsSection');
+      detailsSection.classList.remove('show');
+      setTimeout(() => {
+        detailsSection.style.display = 'none';
+      }, 800);
+    }
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in-up');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.service, .contributor-card, .flip-card').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Keyboard navigation for accessibility
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const nav = document.getElementById("nav");
+        if (nav.classList.contains('active')) {
+          toggleMenu();
+        }
+      }
+    });
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        // Swipe left - next slide
+        nextSlide();
+      }
+      if (touchEndX > touchStartX + 50) {
+        // Swipe right - previous slide (if we had a prev function)
+        nextSlide();
+      }
+    }
+  </script>
+</body>
+</html>
