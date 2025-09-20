@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Our Cause - Mpumelelo Youth Movement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="donatestyle.css">
+</head>
+<body>
+    <!-- Home Button -->
+    <a href="index.html" class="home-btn" aria-label="Return to Home">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+
+    <div class="container">
+        <div class="donation-card">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Transform Lives Today</h1>
+                    <p class="hero-subtitle">Your contribution creates lasting change in communities worldwide</p>
+                </div>
+            </div>
+
+            <div class="content-section" id="mainContent">
+                <div class="section">
+                    <h2 class="section-title">
+                        <div class="icon">💝</div>
+                        Why Your Support Matters
+                    </h2>
+                    <div class="section-content">
+                        In a world where millions face daily challenges of poverty, lack of education, and limited access to basic necessities, your donation becomes a beacon of hope. Every contribution, no matter the size, ripples through communities, creating opportunities for growth, learning, and sustainable development. We believe that together, we can build a world where everyone has the chance to thrive.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">
+                        <div class="icon">🌟</div>
+                        The Impact You'll Make
+                    </h2>
+                    <div class="section-content">
+                        Your donation directly translates into real, measurable change. From providing educational materials to children in remote areas, to supporting clean water initiatives, to empowering local communities with sustainable resources - every contribution works towards building stronger, more resilient communities.
+                    </div>
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <div class="impact-number">100+</div>
+                            <div class="impact-text">Children Educated Monthly</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">100+</div>
+                            <div class="impact-text">Lives Transformed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">
+                        <div class="icon">🤝</div>
+                        How Your Contribution Helps
+                    </h2>
+                    <div class="section-content">
+                        <strong>Funds</strong> help us maintain operations, expand programs, and reach more communities.<br><br>
+                        <strong>Stationery</strong> provides essential learning tools for learners and administrative support for our programs.<br><br>
+                        <strong>Cleaning Materials</strong> ensure healthy, safe environment for the children in daily activities.<br><br>
+                        <strong>Other Items</strong> like clothing, food supplies, or equipment help address the needs and support our various initiatives.
+                    </div>
+                </div>
+
+                <button class="donate-btn" onclick="showDonationOptions()">
+                    Make a Difference - Donate Now
+                </button>
+
+                <div class="donation-options" id="donationOptions">
+                    <h3 class="options-title">How would you like to contribute?</h3>
+                    <div class="option-buttons">
+                        <button class="option-btn" onclick="showDetails('funds')">💰 Funds</button>
+                        <button class="option-btn" onclick="showDetails('stationery')">📝 Stationery</button>
+                        <button class="option-btn" onclick="showDetails('cleaning')">🧽 Cleaning Materials</button>
+                        <button class="option-btn" onclick="showDetails('other')">📦 Other Items</button>
+                    </div>
+
+                    <div class="details-section" id="detailsSection">
+                        <button class="back-btn" onclick="hideDetails()">← Back to Options</button>
+                        <div id="detailsContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDonationOptions() {
+            const donationOptions = document.getElementById('donationOptions');
+            donationOptions.style.display = 'block';
+            setTimeout(() => {
+                donationOptions.classList.add('show');
+            }, 100);
+            donationOptions.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showDetails(type) {
+            const detailsSection = document.getElementById('detailsSection');
+            const detailsContent = document.getElementById('detailsContent');
+            
+            let content = '';
+            
+            switch(type) {
+                case 'funds':
+                    content = `
+                        <h3 class="details-title">💰 Bank Transfer Details</h3>
+                        <div class="bank-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Account Name:</span>
+                                <span class="detail-value">Mpumelelo Youth Movement</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Bank Name:</span>
+                                <span class="detail-value">FNB</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Account Number:</span>
+                                <span class="detail-value">62863372406</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Account Type:</span>
+                                <span class="detail-value">Business Cheque Account</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Branch Code:</span>
+                                <span class="detail-value">250655</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Reference:</span>
+                                <span class="detail-value">Please include "DONATION" in transfer description</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'stationery':
+                    content = `
+                        <h3 class="details-title">📝 Stationery Donation Contact</h3>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Coordinator:</span>
+                                <span class="detail-value">Mmabatho Mabika</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Phone:</span>
+                                <span class="detail-value">+27 60 439 4410</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value">mymovementsa@gmail.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Operating Hours:</span>
+                                <span class="detail-value">Monday - Friday, 9 AM - 5 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Needed Items:</span>
+                                <span class="detail-value">Notebooks, pens, pencils, markers, paper, folders</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'cleaning':
+                    content = `
+                        <h3 class="details-title">🧽 Cleaning Materials Contact</h3>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Coordinator:</span>
+                                <span class="detail-value">Mmabatho Mabika</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Phone:</span>
+                                <span class="detail-value">+27 60 439 4410</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value">MYM@gmail.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Office Hours:</span>
+                                <span class="detail-label">Monday - Friday, 9 AM - 5 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Needed Items:</span>
+                                <span class="detail-value">Disinfectants, soap, sanitizers, toilet paper, towels</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'other':
+                    content = `
+                        <h3 class="details-title">📦 Other Items Contact</h3>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Coordinator:</span>
+                                <span class="detail-value">Mmabatho Mabika</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Phone:</span>
+                                <span class="detail-value">+27 60 439 4410</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Email:</span>
+                                <span class="detail-value">MYM@gmail.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Office Hours:</span>
+                                <span class="detail-value">Monday - Friday, 9 AM - 5 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Accepted Items:</span>
+                                <span class="detail-value">Clothing, blankets, non-perishable food, electronics, books</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Note:</span>
+                                <span class="detail-value">Please call ahead for large donations or special items</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            detailsContent.innerHTML = content;
+            detailsSection.style.display = 'block';
+            setTimeout(() => {
+                detailsSection.classList.add('show');
+            }, 100);
+            detailsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideDetails() {
+            const detailsSection = document.getElementById('detailsSection');
+            detailsSection.classList.remove('show');
+            setTimeout(() => {
+                detailsSection.style.display = 'none';
+            }, 800);
+        }
+
+        // Smooth scrolling enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth entrance animation to cards
+            setTimeout(() => {
+                document.querySelector('.donation-card').style.transform = 'translateY(0)';
+                document.querySelector('.donation-card').style.opacity = '1';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
