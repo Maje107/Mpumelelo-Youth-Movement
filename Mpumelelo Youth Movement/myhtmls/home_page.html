@@ -286,9 +286,10 @@
     .services-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
+      gap: 60px;
       max-width: 1200px;
       margin: 0 auto;
+        column-gap: 40px;
     }
 
     .service {
@@ -463,122 +464,121 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(74, 111, 165, 0.3);
     }
+.gallery {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+}
 
-    .gallery {
-      padding: 80px 20px;
-      background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
-    }
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-    .gallery-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+}
 
-    .gallery-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid #ddd;
-    }
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2c2c2c;
+}
 
-    .gallery-title {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #2c2c2c;
-    }
+.more-btn {
+  background: linear-gradient(135deg, #4A6FA5, #667eea);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.6s ease; /* Slower hover effect */
+  text-decoration: none;
+}
 
-    .more-btn {
-      background: linear-gradient(135deg, #4A6FA5, #667eea);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
+.more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(74, 111, 165, 0.3);
+}
 
-    .more-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(74, 111, 165, 0.3);
-    }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 30px;
-    }
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+}
 
-    .flip-card {
-      background-color: transparent;
-      perspective: 1000px;
-      height: 250px;
-      border-radius: 15px;
-      overflow: hidden;
-    }
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 2s cubic-bezier(0.4, 0.2, 0.2, 1); /* Much slower flip */
+  transform-style: preserve-3d;
+}
 
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 1.2s cubic-bezier(0.4, 0.2, 0.2, 1);
-      transform-style: preserve-3d;
-    }
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
 
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
 
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
+.flip-card-front {
+  background-color: #fff;
+}
 
-    .flip-card-front {
-      background-color: #fff;
-    }
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
 
-    .flip-card-front img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 15px;
-    }
+.flip-card-back {
+  background: linear-gradient(135deg, #4A6FA5, #667eea);
+  color: white;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 1.5s ease; /* Slower fade-in of content */
+}
 
-    .flip-card-back {
-      background: linear-gradient(135deg, #4A6FA5, #667eea);
-      color: white;
-      transform: rotateY(180deg);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+.flip-card-back h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
 
-    .flip-card-back h3 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-    }
-
-    .flip-card-back p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      opacity: 0.9;
-    }
-
+.flip-card-back p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
     /* Mobile Responsive */
     @media (max-width: 768px) {
       header {
@@ -703,6 +703,100 @@
   color: #f0d9c3; /* Use the same color as your underline element */
   text-decoration: underline;
 }
+.pdf-wrapper {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  /* Resizable Window */
+  .pdf-window {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-width: 800px;
+    min-height: 300px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    resize: both;       /* allow resizing */
+  }
+
+  /* Draggable Header */
+  .pdf-header {
+    background: #222;
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
+  }
+
+  .close-btn {
+    background: #e74c3c;
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .close-btn:hover {
+    background: #c0392b;
+  }
+
+  /* PDF area */
+  .pdf-box {
+    flex: 1;
+    position: relative;
+    resize: both;
+  }
+
+  .pdf-box object {
+    width: 100%;
+    height: 100%;
+    border: none;
+     resize: both; 
+  }
+/*width: 300px;
+  height: 200px;
+  border: 2px solid #4A6FA5;
+  padding: 10px;
+  overflow: auto;   /* Required for resize to work */
+    /* Allow resizing */
+  /* Overlay only in the top-right corner where download button usually is */
+  .pdf-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;    /* adjust width if needed */
+    height: 40px;   /* toolbar height */
+    background: transparent;
+    cursor: not-allowed;
+  }
+
+  /* Button styling */
+  .toolkit-btn {
+    padding: 12px 20px;
+    background: #3498db;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .toolkit-btn:hover {
+    background: #2980b9;
+  }
   </style>
 </head>
 <body>
@@ -798,7 +892,11 @@
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%23667eea'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E📚%3C/text%3E%3C/svg%3E" alt="Education Initiatives" />
         <h3>Education Initiatives</h3>
         <p>Promoting access to education through programs, scholarships, and resources tailored to learning innovation.</p>
+
+
+</div>
       </div>
+
       <div class="service">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%23f093fb'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E👥%3C/text%3E%3C/svg%3E" alt="Mentorship" />
         <h3>Mentorship Programs</h3>
@@ -886,7 +984,7 @@
     <div class="contact-container">
       <div class="contact-info">
         <h2>Contact Us</h2>
-        <p><i class="fas fa-envelope"></i> 202340368@spu.ac.za</p>
+        <p><i class="fas fa-envelope"></i> mymovementsa@gmail.com</p>
         <p><i class="fas fa-phone"></i> +27 60 439 4410</p>
         <p><i class="fas fa-map-marker-alt"></i> 13214 Thutlo Street</p>
         <p>Bloemanda</p>
@@ -907,7 +1005,7 @@
     <div class="gallery-container">
       <div class="gallery-header">
         <h1 class="gallery-title">Media Gallery</h1>
-        <a href="https://solplaatjeuniversity-my.sharepoint.com/:f:/g/personal/201703165_spu_ac_za/EsraOiiJxYdHuFW4f-FSiaYBSJ8Vo0ccSvr9sV3UIMTC-g?e=uTZieN" target="_blank" class="more-btn">
+        <a href="https://www.facebook.com/mymovementsa/about" target="_blank" class="more-btn">
           <span>View More</span>
           <i class="fas fa-chevron-right"></i>
         </a>
@@ -974,23 +1072,14 @@
           </div>
         </div>
 
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='250' viewBox='0 0 280 250'%3E%3Cdefs%3E%3ClinearGradient id='civic' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%239D50BB;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%236E48AA;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='280' height='250' fill='url(%23civic)'/%3E%3Ctext x='140' y='120' text-anchor='middle' fill='white' font-size='16' font-family='Arial'%3E🏛️ Civic &%3C/text%3E%3Ctext x='140' y='145' text-anchor='middle' fill='white' font-size='16' font-family='Arial'%3EDemocracy%3C/text%3E%3C/svg%3E" alt="Civic and Democracy">
-            </div>
-            <div class="flip-card-back">
-              <h3>Civic and Democracy</h3>
-              <p>Promoting civic engagement and democratic participation through education and community involvement initiatives.</p>
-            </div>
-          </div>
-        </div>
+    
       </div>
     </div>
   </section>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
+  
     // Initialize AOS
     AOS.init({
       duration: 800,
