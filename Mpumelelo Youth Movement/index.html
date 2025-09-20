@@ -17,8 +17,8 @@
   <header>
     <div class="logo-container">
       <div class="logo">
-        <img src="C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\logo.png" alt="MYM Logo">
-      </div>
+        <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/310588085_167990925893526_5838555252369053146_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=PyZU7bQoEfcQ7kNvwGOIbXb&_nc_oc=AdmWnFsNB1PZYfcPNO395PrZVe9D8XaYaDbNqJGe2V-qYqG3yLit3_QgR8m21HhNTbc&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=gThNJfS1yvO2aw57wDrkCQ&oh=00_AfZo4cnIHl81jLx1h7R3-XUKiY5GqWuAUu8jKdaKT6uRJw&oe=68D51911" alt="Mpumelelo Youth Movement Logo">
+</div>
       <h1>Mpumelelo Youth Movement</h1>
     </div>
     
@@ -41,9 +41,9 @@
 
   <section id="home" class="hero" onclick="nextSlide()">
     <div class="slideshow">
-      <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pic1.jpg" alt="Youth Empowerment">
-       <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pic2.jpg" alt="Youth Empowerment">
-       <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\pic3.jpg"alt="Youth Empowerment">
+      <img src= "https://th.bing.com/th/id/OIP.yk14N144LiuLqfWHA15C2AHaEm?w=236&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Youth Empowerment">
+       <img src= "https://th.bing.com/th/id/OIP.bBmSpnuAIsTy3pRqCnrKIAHaE4?w=228&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3" alt="Youth Empowerment">
+       <img src= "https://th.bing.com/th/id/OIP.eIxluqPzCnYgkWfdjKeUBAHaEK?w=294&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3"alt="Youth Empowerment">
       
 
        </div>
@@ -122,7 +122,7 @@
     
     <div class="contributors-container">
       <div class="contributor-card">
-        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\spu.jpeg"alt="Sol Plaatje University" class="contributor-photo" >
+        <img src= "https://applications-prod.spu.ac.za/assets/images/university_logo.jpg"alt="Sol Plaatje University" class="contributor-photo" >
         <div class="contributor-details">
           <div class="contributor-name">Sol Plaatje University</div>
           <div class="contributor-title">Local University</div>
@@ -131,12 +131,13 @@
           </div>
           <div class="contributor-contact">
             <i class="fas fa-phone"></i> 053 491 0000
+            <i class="fas fa-link"></i> <a href="https://www.spu.ac.za/" target="_blank">https://www.spu.ac.za/</a>
           </div>
         </div>
       </div>
       
       <div class="contributor-card">
-        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\presidency.png"alt="Presidential" class="contributor-photo">
+        <img src= "https://www.thepresidency.gov.za/sites/default/files/coa.png"alt="Presidential" class="contributor-photo">
         <div class="contributor-details">
           <div class="contributor-name"> Presidential Stimulus Fund</div>
           <div class="contributor-title">Government Agency</div>
@@ -148,7 +149,7 @@
       </div>
       
         <div class="contributor-card">
-        <img src= "C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\ASSITEJ.webp" alt="Assitej" class="contributor-photo" >
+        <img src= "https://assitej.org.za/wp-content/uploads/2017/07/cropped-altered-logo.png" alt="Assitej" class="contributor-photo" >
         <div class="contributor-details">
           <div class="contributor-name">Assitej (SA)</div>
           <div class="contributor-title">International NGO</div>
@@ -157,13 +158,13 @@
           </div>
           <div class="contributor-contact">
             <i class="fas fa-phone"></i>+27 73 589 2305 
-              <i class="fas fa-link"></i> <a href="https://assitej-international.org" target="_blank">https://assitej-international.org</a>
+              <i class="fas fa-link"></i> <a href="https://assitej.org.za/" target="_blank">https://assitej.org.za/</a>
        
           </div>
         </div>
       </div>
       <div class="contributor-card">
-        <img src="C:\Users\Admin\OneDrive - Sol Plaatje University\Mpumelelo Youth Movement\images\kagiso trust.png" alt="Kagiso Trust" class="contributor-photo">
+        <img src="https://kagiso.co.za/wp-content/uploads/2024/06/kt-40-anniversary-logo.svg" alt="Kagiso Trust" class="contributor-photo">
         <div class="contributor-details">
           <div class="contributor-name">Kagiso Trust</div>
           <div class="contributor-title">Development Agency</div>
@@ -172,6 +173,11 @@
           </div>
           <div class="contributor-contact">
             <i class="fas fa-phone"></i>011 566 1900
+          </div>
+          <div class="contributor-contact">
+            <i class="fas fa-phone"></i>+27 73 589 2305 
+              <i class="fas fa-link"></i> <a href="https://kagiso.co.za/" target="_blank">https://kagiso.co.za/</a>
+       
           </div>
         </div>
       </div>
@@ -309,6 +315,7 @@
         if (idx === i) slide.classList.add('active');
       });
     }
+    showSlide(slideIndex);
     
     function nextSlide() {
       slideIndex = (slideIndex + 1) % slides.length;
@@ -316,7 +323,7 @@
     }
 
     // Auto slideshow
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 10000); // Change slide every 10 seconds (adjust as needed)000);
 
     // Menu toggle functionality
     function toggleMenu() {
@@ -357,7 +364,7 @@
     }
 
     // Auto about carousel
-    setInterval(nextAbout, 7000);
+  setInterval(nextAbout, 120000); 
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav ul li a[href^="#"]').forEach(link => {
