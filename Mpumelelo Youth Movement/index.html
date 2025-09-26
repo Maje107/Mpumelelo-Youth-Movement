@@ -6,9 +6,879 @@
   <title>Mpumelelo Youth Movement</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
- 
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      z-index: 9999;
+      transition: width 0.3s ease;
+    }
+
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #1e2a32;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    header h1 {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .slideshow img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slideshow img.active {
+      opacity: 1;
+    }
+
+    .slideshow::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(102,126,234,0.3));
+    }
+
+    .hero-content {
+      z-index: 2;
+      max-width: 800px;
+      padding: 2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content h2 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .underline {
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      margin: 1rem auto;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin: 2rem 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    /* About Section */
+    .about-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      position: relative;
+      padding: 2rem;
+    }
+
+    .about-card {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-width: 600px;
+      text-align: center;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.8s ease;
+    }
+
+    .about-card.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .about-card h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .about-card .underline {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+    }
+
+    .about-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #666;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .arrow.left {
+      left: 2rem;
+    }
+
+    .arrow.right {
+      right: 2rem;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 5rem 2rem;
+      background: white;
+      text-align: center;
+    }
+
+    .services-section h2 {
+      font-size: 3rem;
+      color: #333;
+      margin-bottom: 3rem;
+    }
+
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .service.fade-in-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .service img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1rem;
+    }
+
+    .service h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .service p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Contributors Section */
+    .contributors-section {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .contributors-section h2 {
+      font-size: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .contributors-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contributor-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .contributor-card.fade-in-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contributor-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .contributor-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .contributor-name {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .contributor-title {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1rem;
+    }
+
+    .contributor-contact {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .contributor-contact a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .contributor-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .contact-info h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 1rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-info i {
+      color: #667eea;
+      width: 20px;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .contact-form button {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Map Styles */
+    .map-container {
+      margin-top: 2rem;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 300px;
+      border: 0;
+    }
+
+    /* Gallery Section */
+    .gallery {
+      padding: 5rem 2rem;
+      background: white;
+    }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .gallery-title {
+      font-size: 3rem;
+      color: #333;
+    }
+
+    .more-btn {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .more-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      perspective: 1000px;
+      height: 250px;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .flip-card.fade-in-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .flip-card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .flip-card-back h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .flip-card-back p {
+      line-height: 1.6;
+    }
+
+    /* Chatbot Styles */
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .chatbot-toggle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+    }
+
+    .chatbot-window {
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 350px;
+      height: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chatbot-window.active {
+      display: flex;
+    }
+
+    .chatbot-header {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .chatbot-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .chatbot-close:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 0.8rem 1rem;
+      border-radius: 18px;
+      word-wrap: break-word;
+    }
+
+    .message.bot {
+      background: #f0f0f0;
+      align-self: flex-start;
+    }
+
+    .message.user {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      align-self: flex-end;
+    }
+
+    .chatbot-input-container {
+      padding: 1rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chatbot-input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 0.8rem 1rem;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .chatbot-input:focus {
+      border-color: #667eea;
+    }
+
+    .chatbot-send {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .chatbot-send:hover {
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1e2a32;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      nav.active {
+        transform: translateX(0);
+      }
+
+      nav ul {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0;
+      }
+
+      nav ul li a {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .hero-content h2 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+
+      .about-card {
+        padding: 2rem;
+      }
+
+      .about-card h2 {
+        font-size: 2rem;
+      }
+
+      .arrow {
+        width: 40px;
+        height: 40px;
+      }
+
+      .arrow.left {
+        left: 1rem;
+      }
+
+      .arrow.right {
+        right: 1rem;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .gallery-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .gallery-title {
+        font-size: 2rem;
+      }
+
+      .chatbot-window {
+        width: 320px;
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      header h1 {
+        font-size: 1.2rem;
+      }
+
+      .logo img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+
+      .services-section h2,
+      .contributors-section h2,
+      .gallery-title {
+        font-size: 1.8rem;
+      }
+
+      .chatbot-window {
+        width: calc(100vw - 40px);
+        height: 400px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Scroll indicator -->
@@ -18,7 +888,7 @@
     <div class="logo-container">
       <div class="logo">
         <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/310588085_167990925893526_5838555252369053146_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=PyZU7bQoEfcQ7kNvwGOIbXb&_nc_oc=AdmWnFsNB1PZYfcPNO395PrZVe9D8XaYaDbNqJGe2V-qYqG3yLit3_QgR8m21HhNTbc&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=gThNJfS1yvO2aw57wDrkCQ&oh=00_AfZo4cnIHl81jLx1h7R3-XUKiY5GqWuAUu8jKdaKT6uRJw&oe=68D51911" alt="Mpumelelo Youth Movement Logo">
-</div>
+      </div>
       <h1>Mpumelelo Youth Movement</h1>
     </div>
     
@@ -34,19 +904,17 @@
         <li><a href="#contributors"><i class="fas fa-handshake"></i> <span>Contributors</span></a></li>
         <li><a href="#contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
         <li><a href="#photos"><i class="fas fa-images"></i> <span>Gallery</span></a></li>
-        <li><a href="donate.html" ><i class="fas fa-donate"></i> <span>Donate</span></a></li>
+        <li><a href="donate.html"><i class="fas fa-donate"></i> <span>Donate</span></a></li>
       </ul>
     </nav>
   </header>
 
   <section id="home" class="hero" onclick="nextSlide()">
     <div class="slideshow">
-      <img src= "https://th.bing.com/th/id/OIP.yk14N144LiuLqfWHA15C2AHaEm?w=236&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Youth Empowerment">
-       <img src= "https://th.bing.com/th/id/OIP.bBmSpnuAIsTy3pRqCnrKIAHaE4?w=228&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3" alt="Youth Empowerment">
-       <img src= "https://th.bing.com/th/id/OIP.eIxluqPzCnYgkWfdjKeUBAHaEK?w=294&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3"alt="Youth Empowerment">
-      
-
-       </div>
+      <img src="https://th.bing.com/th/id/OIP.yk14N144LiuLqfWHA15C2AHaEm?w=236&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="Youth Empowerment">
+      <img src="https://th.bing.com/th/id/OIP.bBmSpnuAIsTy3pRqCnrKIAHaE4?w=228&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3" alt="Youth Empowerment">
+      <img src="https://th.bing.com/th/id/OIP.eIxluqPzCnYgkWfdjKeUBAHaEK?w=294&h=180&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3" alt="Youth Empowerment">
+    </div>
     
     <div class="hero-content">
       <h2>Welcome to Mpumelelo Youth Movement</h2>
@@ -103,18 +971,13 @@
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%23667eea'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E📚%3C/text%3E%3C/svg%3E" alt="Education Initiatives" />
         <h3>Education Initiatives</h3>
         <p>Promoting access to education through programs, scholarships, and resources tailored to learning innovation.</p>
-
-
-</div>
-  <div class="service">
+      </div>
+      <div class="service">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Ccircle cx='75' cy='75' r='70' fill='%23f093fb'/%3E%3Ctext x='75' y='85' text-anchor='middle' fill='white' font-size='20' font-family='Arial'%3E👥%3C/text%3E%3C/svg%3E" alt="Mentorship" />
         <h3>Mentorship Programs</h3>
         <p>Connecting youth with mentors who can provide guidance and support, helping them navigate challenges and achieve their full potential.</p>
       </div>
     </div>
-      </div>
-
-    
   </section>
 
   <section class="contributors-section" id="contributors">
@@ -122,7 +985,7 @@
     
     <div class="contributors-container">
       <div class="contributor-card">
-        <img src= "https://applications-prod.spu.ac.za/assets/images/university_logo.jpg"alt="Sol Plaatje University" class="contributor-photo" >
+        <img src="https://applications-prod.spu.ac.za/assets/images/university_logo.jpg" alt="Sol Plaatje University" class="contributor-photo">
         <div class="contributor-details">
           <div class="contributor-name">Sol Plaatje University</div>
           <div class="contributor-title">Local University</div>
@@ -137,19 +1000,18 @@
       </div>
       
       <div class="contributor-card">
-        <img src= "https://www.thepresidency.gov.za/sites/default/files/coa.png"alt="Presidential" class="contributor-photo">
+        <img src="https://www.thepresidency.gov.za/sites/default/files/coa.png" alt="Presidential" class="contributor-photo">
         <div class="contributor-details">
-          <div class="contributor-name"> Presidential Stimulus Fund</div>
+          <div class="contributor-name">Presidential Stimulus Fund</div>
           <div class="contributor-title">Government Agency</div>
           <div class="contributor-contact">
-      <i class="fas fa-link"></i> <a href="https://www.thepresidency.gov.za" target="_blank">https://www.thepresidency.gov.za</a>
+            <i class="fas fa-link"></i> <a href="https://www.thepresidency.gov.za" target="_blank">https://www.thepresidency.gov.za</a>
           </div>
-          
         </div>
       </div>
       
-        <div class="contributor-card">
-        <img src= "https://assitej.org.za/wp-content/uploads/2017/07/cropped-altered-logo.png" alt="Assitej" class="contributor-photo" >
+      <div class="contributor-card">
+        <img src="https://assitej.org.za/wp-content/uploads/2017/07/cropped-altered-logo.png" alt="Assitej" class="contributor-photo">
         <div class="contributor-details">
           <div class="contributor-name">Assitej (SA)</div>
           <div class="contributor-title">International NGO</div>
@@ -158,11 +1020,11 @@
           </div>
           <div class="contributor-contact">
             <i class="fas fa-phone"></i>+27 73 589 2305 
-              <i class="fas fa-link"></i> <a href="https://assitej.org.za/" target="_blank">https://assitej.org.za/</a>
-       
+            <i class="fas fa-link"></i> <a href="https://assitej.org.za/" target="_blank">https://assitej.org.za/</a>
           </div>
         </div>
       </div>
+      
       <div class="contributor-card">
         <img src="https://kagiso.co.za/wp-content/uploads/2024/06/kt-40-anniversary-logo.svg" alt="Kagiso Trust" class="contributor-photo">
         <div class="contributor-details">
@@ -175,17 +1037,13 @@
             <i class="fas fa-phone"></i>011 566 1900
           </div>
           <div class="contributor-contact">
-            <i class="fas fa-phone"></i>+27 73 589 2305 
-              <i class="fas fa-link"></i> <a href="https://kagiso.co.za/" target="_blank">https://kagiso.co.za/</a>
-       
+            <i class="fas fa-link"></i> <a href="https://kagiso.co.za/" target="_blank">https://kagiso.co.za/</a>
           </div>
         </div>
       </div>
       
       <div class="contributor-card">
-        <img src= "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDA
-        wIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDQwMCAxNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPCEtLSBCYWNrZ3JvdW5kIGNpcmNsZSAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI3NSIgcj0iNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgogIAogIDwhLS0gTWFpbiB0aXRsZSAtLT4KICA8dGV4dCB4PSIyMDAiIHk9IjUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+UElPTkVFUlM8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSI3NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0ibm9ybWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+T0Y8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImJsYWNrIj5DSEFOR0U8L3RleHQ+CiAgCiAgPCEtLSBFc3RhYmxpc2htZW50IHllYXIgLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIxMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCwg
-        c2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9Im5vcm1hbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iYmxhY2siPkVTVC4gMjAyNTwvdGV4dD4KICAKICA8IS0tIERlY29yYXRpdmUgZWxlbWVudHMgLS0+CiAgPGxpbmUgeDE9IjE0MCIgeTE9Ijc1IiB4Mj0iMTU1IiB5Mj0iNzUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIyNDUiIHkxPSI3NSIgeDI9IjI2MCIgeTI9Ijc1IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEiLz4KICAKICA8IS0tIEFycm93IHBvaW50aW5nIGZvcndhcmQgKHN5bWJvbGl6aW5nIHBpb25lZXJpbmcvcHJvZ3Jlc3MpIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMTcwLDY1IDE4NSw3NSAxNzAsODUiIGZpbGw9ImJsYWNrIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTUsNjUgMjMwLDc1IDIxNSw4NSIgZmlsbD0iYmxhY2siLz4KPC9zdmc+"  alt="Pioneers Of Change" class="contributor-photo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDQwMCAxNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPCEtLSBCYWNrZ3JvdW5kIGNpcmNsZSAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI3NSIgcj0iNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgogIAogIDwhLS0gTWFpbiB0aXRsZSAtLT4KICA8dGV4dCB4PSIyMDAiIHk9IjUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+UElPTkVFUlM8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSI3NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0ibm9ybWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJibGFjayI+T0Y8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9ImJsYWNrIj5DSEFOR0U8L3RleHQ+CiAgCiAgPCEtLSBFc3RhYmxpc2htZW50IHllYXIgLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIxMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9Im5vcm1hbCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iYmxhY2siPkVTVC4gMjAyNTwvdGV4dD4KICAKICA8IS0tIERlY29yYXRpdmUgZWxlbWVudHMgLS0+CiAgPGxpbmUgeDE9IjE0MCIgeTE9Ijc1IiB4Mj0iMTU1IiB5Mj0iNzUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIyNDUiIHkxPSI3NSIgeDI9IjI2MCIgeTI9Ijc1IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEiLz4KICAKICA8IS0tIEFycm93IHBvaW50aW5nIGZvcndhcmQgKHN5bWJvbGl6aW5nIHBpb25lZXJpbmcvcHJvZ3Jlc3MpIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMTcwLDY1IDE4NSw3NSAxNzAsODUiIGZpbGw9ImJsYWNrIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIyMTUsNjUgMjMwLDc1IDIxNSw4NSIgZmlsbD0iYmxhY2siLz4KPC9zdmc+" alt="Pioneers Of Change" class="contributor-photo">
         <div class="contributor-details">
           <div class="contributor-name">Pioneers Of Change</div>
           <div class="contributor-title">Students From Sol Plaatje University</div>
@@ -210,7 +1068,19 @@
         <p>Bloemanda</p>
         <p>Kimberley, South Africa</p>
         <p>8345</p>
+        
+        <!-- Map Container -->
+        <div class="map-container">
+          <iframe 
+            class="map-embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.8745621234567!2d24.7651234!3d-28.7384567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQ0JzE4LjQiUyAyNMKwNDUnNTQuNCJF!5e0!3m2!1sen!2sza!4v1234567890123!5m2!1sen!2sza"
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
       </div>
+      
       <form class="contact-form" action="https://formsubmit.co/mymovementsa@gmail.com" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
@@ -291,15 +1161,41 @@
             </div>
           </div>
         </div>
-
-    
       </div>
     </div>
   </section>
 
+  <!-- AI Chatbot -->
+  <div class="chatbot-container">
+    <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+      <i class="fas fa-robot"></i>
+    </button>
+    
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chatbot-header">
+        <h3>🤖 Pioneer - Your AI Assistant</h3>
+        <button class="chatbot-close" onclick="toggleChatbot()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message bot">
+          Hi! I'm Pioneer, your AI assistant for Mpumelelo Youth Movement. I can help you learn about our programs, services, contact information, and more. How can I assist you today? 😊
+        </div>
+      </div>
+      
+      <div class="chatbot-input-container">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything..." onkeypress="handleChatbotKeyPress(event)">
+        <button class="chatbot-send" onclick="sendChatbotMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-  
     // Initialize AOS
     AOS.init({
       duration: 800,
@@ -325,7 +1221,7 @@
     }
 
     // Auto slideshow
-    setInterval(nextSlide, 10000); // Change slide every 10 seconds (adjust as needed)000);
+    setInterval(nextSlide, 10000);
 
     // Menu toggle functionality
     function toggleMenu() {
@@ -334,7 +1230,6 @@
       
       nav.classList.toggle("active");
       
-      // Change icon
       if (nav.classList.contains('active')) {
         menuToggle.className = 'fas fa-times';
       } else {
@@ -366,7 +1261,7 @@
     }
 
     // Auto about carousel
-  setInterval(nextAbout, 120000); 
+    setInterval(nextAbout, 12000);
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav ul li a[href^="#"]').forEach(link => {
@@ -377,7 +1272,6 @@
         
         if (!targetElement) return;
 
-        // Close mobile menu if open
         const nav = document.getElementById("nav");
         const menuToggle = document.querySelector('.menu-toggle i');
         if (nav.classList.contains('active')) {
@@ -385,7 +1279,6 @@
           menuToggle.className = 'fas fa-bars';
         }
 
-        // Smooth scroll to target
         targetElement.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
@@ -421,163 +1314,11 @@
       button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       button.disabled = true;
       
-      // Reset after 3 seconds (in case of issues)
       setTimeout(() => {
         button.innerHTML = 'Send Message';
         button.disabled = false;
       }, 3000);
     });
-
-    // Donation page function - now shows section
-    function showDonationOptions() {
-      const donationOptions = document.getElementById('donationOptions');
-      donationOptions.style.display = 'block';
-      setTimeout(() => {
-        donationOptions.classList.add('show');
-      }, 100);
-      donationOptions.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function showDetails(type) {
-      const detailsSection = document.getElementById('detailsSection');
-      const detailsContent = document.getElementById('detailsContent');
-      
-      let content = '';
-      
-      switch(type) {
-        case 'funds':
-          content = `
-            <h3 class="details-title">💰 Bank Transfer Details</h3>
-            <div class="bank-details">
-              <div class="detail-item">
-                <span class="detail-label">Account Name:</span>
-                <span class="detail-value">Mpumelelo Youth Movement</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Bank Name:</span>
-                <span class="detail-value">First National Bank</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Account Number:</span>
-                <span class="detail-value">1234567890</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Branch Code:</span>
-                <span class="detail-value">250655</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Account Type:</span>
-                <span class="detail-value">Current Account</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Reference:</span>
-                <span class="detail-value">Please include "DONATION" in transfer description</span>
-              </div>
-            </div>
-          `;
-          break;
-        case 'stationery':
-          content = `
-            <h3 class="details-title">📝 Stationery Donation Contact</h3>
-            <div class="contact-details">
-              <div class="detail-item">
-                <span class="detail-label">Coordinator:</span>
-                <span class="detail-value">Sarah Molefe</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Phone:</span>
-                <span class="detail-value">+27 60 439 4410</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Email:</span>
-                <span class="detail-value">stationery@mym.org.za</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Office Hours:</span>
-                <span class="detail-value">Monday - Friday, 9 AM - 5 PM</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Needed Items:</span>
-                <span class="detail-value">Notebooks, pens, pencils, markers, paper, folders</span>
-              </div>
-            </div>
-          `;
-          break;
-        case 'cleaning':
-          content = `
-            <h3 class="details-title">🧽 Cleaning Materials Contact</h3>
-            <div class="contact-details">
-              <div class="detail-item">
-                <span class="detail-label">Coordinator:</span>
-                <span class="detail-value">Thabo Mthembu</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Phone:</span>
-                <span class="detail-value">+27 71 544 1437</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Email:</span>
-                <span class="detail-value">supplies@mym.org.za</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Office Hours:</span>
-                <span class="detail-value">Monday - Friday, 8 AM - 4 PM</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Needed Items:</span>
-                <span class="detail-value">Disinfectants, soap, sanitizers, toilet paper, towels</span>
-              </div>
-            </div>
-          `;
-          break;
-        case 'other':
-          content = `
-            <h3 class="details-title">📦 Other Items Contact</h3>
-            <div class="contact-details">
-              <div class="detail-item">
-                <span class="detail-label">Coordinator:</span>
-                <span class="detail-value">Nomsa Dlamini</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Phone:</span>
-                <span class="detail-value">+27 53 491 0000</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Email:</span>
-                <span class="detail-value">donations@mym.org.za</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Office Hours:</span>
-                <span class="detail-value">Monday - Saturday, 10 AM - 6 PM</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Accepted Items:</span>
-                <span class="detail-value">Clothing, blankets, non-perishable food, electronics, books</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">Note:</span>
-                <span class="detail-value">Please call ahead for large donations or special items</span>
-              </div>
-            </div>
-          `;
-          break;
-      }
-      
-      detailsContent.innerHTML = content;
-      detailsSection.style.display = 'block';
-      setTimeout(() => {
-        detailsSection.classList.add('show');
-      }, 100);
-      detailsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function hideDetails() {
-      const detailsSection = document.getElementById('detailsSection');
-      detailsSection.classList.remove('show');
-      setTimeout(() => {
-        detailsSection.style.display = 'none';
-      }, 800);
-    }
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -593,17 +1334,125 @@
       });
     }, observerOptions);
 
-    // Observe elements for animation
     document.querySelectorAll('.service, .contributor-card, .flip-card').forEach(el => {
       observer.observe(el);
     });
+
+    // Chatbot functionality
+    const chatbotKnowledge = {
+      about: "Mpumelelo Youth Movement is a dedicated non-profit organization focused on uplifting communities, advocating for social justice, and providing resources to empower individuals. We act as a catalyst for positive change by fostering opportunities and creating lasting partnerships.",
+      vision: "Our vision is to build a world where every young person is equipped with the tools, knowledge, and support they need to achieve their full potential, regardless of their background or circumstances.",
+      services: "We provide three main services: 1) Community Outreach - providing essential resources to underserved communities, 2) Education Initiatives - promoting access to education through programs and scholarships, and 3) Mentorship Programs - connecting youth with mentors for guidance and support.",
+      contact: "You can reach us at mymovementsa@gmail.com or call +27 60 439 4410. We're located at 13214 Thutlo Street, Bloemanda, Kimberley, South Africa 8345.",
+      contributors: "Our key contributors include Sol Plaatje University, Presidential Stimulus Fund, Assitej (SA), Kagiso Trust, and Pioneers Of Change (students from SPU).",
+      programs: "We run various programs including Arts and Culture initiatives, Climate Change awareness, Community Dialogue sessions, Educational Support, and Debate Programs.",
+      volunteer: "To get involved, you can contact us directly through our contact form on the website, email us at mymovementsa@gmail.com, or call +27 60 439 4410. We welcome volunteers, donations, and partnerships.",
+      location: "We're based in Kimberley, South Africa, specifically at 13214 Thutlo Street, Bloemanda, Kimberley 8345. You can see our exact location on the map in our contact section."
+    };
+
+    function toggleChatbot() {
+      const chatbotWindow = document.getElementById('chatbotWindow');
+      chatbotWindow.classList.toggle('active');
+      
+      if (chatbotWindow.classList.contains('active')) {
+        document.getElementById('chatbotInput').focus();
+      }
+    }
+
+    function sendChatbotMessage() {
+      const input = document.getElementById('chatbotInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      addChatbotMessage(message, 'user');
+      input.value = '';
+      
+      setTimeout(() => {
+        const response = generateChatbotResponse(message);
+        addChatbotMessage(response, 'bot');
+      }, 1000);
+    }
+
+    function handleChatbotKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendChatbotMessage();
+      }
+    }
+
+    function addChatbotMessage(message, sender) {
+      const messagesContainer = document.getElementById('chatbotMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      messageDiv.textContent = message;
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function generateChatbotResponse(userMessage) {
+      const message = userMessage.toLowerCase();
+      
+      if (message.includes('about') || message.includes('what is') || message.includes('who are')) {
+        return chatbotKnowledge.about;
+      }
+      
+      if (message.includes('vision') || message.includes('goal') || message.includes('mission')) {
+        return chatbotKnowledge.vision;
+      }
+      
+      if (message.includes('service') || message.includes('what do you do') || message.includes('programs')) {
+        return chatbotKnowledge.services;
+      }
+      
+      if (message.includes('contact') || message.includes('phone') || message.includes('email') || message.includes('reach')) {
+        return chatbotKnowledge.contact;
+      }
+      
+      if (message.includes('contributor') || message.includes('partner') || message.includes('sponsor')) {
+        return chatbotKnowledge.contributors;
+      }
+      
+      if (message.includes('volunteer') || message.includes('help') || message.includes('involved') || message.includes('join')) {
+        return chatbotKnowledge.volunteer;
+      }
+      
+      if (message.includes('location') || message.includes('where') || message.includes('address')) {
+        return chatbotKnowledge.location;
+      }
+      
+      if (message.includes('arts') || message.includes('culture') || message.includes('debate') || message.includes('climate')) {
+        return chatbotKnowledge.programs;
+      }
+      
+      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return "Hello! I'm Pioneer, your AI assistant for Mpumelelo Youth Movement. How can I help you today? You can ask me about our services, programs, contact information, or how to get involved! 😊";
+      }
+      
+      if (message.includes('thank') || message.includes('thanks')) {
+        return "You're welcome! I'm here to help. Feel free to ask me anything else about Mpumelelo Youth Movement or our programs! 😊";
+      }
+      
+      if (message.includes('donate') || message.includes('donation')) {
+        return "Thank you for your interest in donating! You can support us through financial donations or by contributing items like stationery and cleaning materials. Please contact us at mymovementsa@gmail.com or +27 60 439 4410 for donation details.";
+      }
+      
+      // Default response
+      return "I'd be happy to help! You can ask me about our services, programs, contact information, how to volunteer, our contributors, location, or anything else about Mpumelelo Youth Movement. What would you like to know?";
+    }
 
     // Keyboard navigation for accessibility
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         const nav = document.getElementById("nav");
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        
         if (nav.classList.contains('active')) {
           toggleMenu();
+        }
+        
+        if (chatbotWindow.classList.contains('active')) {
+          toggleChatbot();
         }
       }
     });
@@ -623,14 +1472,32 @@
 
     function handleSwipe() {
       if (touchEndX < touchStartX - 50) {
-        // Swipe left - next slide
         nextSlide();
       }
       if (touchEndX > touchStartX + 50) {
-        // Swipe right - previous slide (if we had a prev function)
         nextSlide();
       }
     }
+
+    // Initialize chatbot with welcome message
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add a small delay to show the chatbot icon with animation
+      setTimeout(() => {
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        chatbotToggle.style.animation = 'pulse 2s infinite';
+      }, 3000);
+    });
+
+    // Add pulse animation for chatbot
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
