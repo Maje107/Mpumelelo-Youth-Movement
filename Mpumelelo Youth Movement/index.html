@@ -1390,56 +1390,64 @@
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
-    function generateChatbotResponse(userMessage) {
-      const message = userMessage.toLowerCase();
-      
-      if (message.includes('about') || message.includes('what is') || message.includes('who are')) {
-        return chatbotKnowledge.about;
-      }
-      
-      if (message.includes('vision') || message.includes('goal') || message.includes('mission')) {
-        return chatbotKnowledge.vision;
-      }
-      
-      if (message.includes('service') || message.includes('what do you do') || message.includes('programs')) {
-        return chatbotKnowledge.services;
-      }
-      
-      if (message.includes('contact') || message.includes('phone') || message.includes('email') || message.includes('reach')) {
-        return chatbotKnowledge.contact;
-      }
-      
-      if (message.includes('contributor') || message.includes('partner') || message.includes('sponsor')) {
-        return chatbotKnowledge.contributors;
-      }
-      
-      if (message.includes('volunteer') || message.includes('help') || message.includes('involved') || message.includes('join')) {
-        return chatbotKnowledge.volunteer;
-      }
-      
-      if (message.includes('location') || message.includes('where') || message.includes('address')) {
-        return chatbotKnowledge.location;
-      }
-      
-      if (message.includes('arts') || message.includes('culture') || message.includes('debate') || message.includes('climate')) {
-        return chatbotKnowledge.programs;
-      }
-      
-      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-        return "Hello! I'm Pioneer, your AI assistant for Mpumelelo Youth Movement. How can I help you today? You can ask me about our services, programs, contact information, or how to get involved! 😊";
-      }
-      
-      if (message.includes('thank') || message.includes('thanks')) {
-        return "You're welcome! I'm here to help. Feel free to ask me anything else about Mpumelelo Youth Movement or our programs! 😊";
-      }
-      
-      if (message.includes('donate') || message.includes('donation')) {
-        return "Thank you for your interest in donating! You can support us through financial donations or by contributing items like stationery and cleaning materials. Please contact us at mymovementsa@gmail.com or +27 60 439 4410 for donation details.";
-      }
-      
-      // Default response
-      return "I'd be happy to help! You can ask me about our services, programs, contact information, how to volunteer, our contributors, location, or anything else about Mpumelelo Youth Movement. What would you like to know?";
-    }
+  function generateChatbotResponse(userMessage) {
+  const message = userMessage.toLowerCase();
+  
+  if (message.includes('about') || message.includes('what is') || message.includes('who are')) {
+    return chatbotKnowledge.about;
+  }
+  
+  if (message.includes('vision') || message.includes('goal') || message.includes('mission')) {
+    return chatbotKnowledge.vision;
+  }
+  
+  if (message.includes('service') || message.includes('what do you do') || message.includes('programs')) {
+    return chatbotKnowledge.services;
+  }
+  
+  if (message.includes('contact') || message.includes('phone') || message.includes('email') || message.includes('reach')) {
+    return chatbotKnowledge.contact;
+  }
+  
+  if (message.includes('contributor') || message.includes('partner') || message.includes('sponsor')) {
+    return chatbotKnowledge.contributors;
+  }
+  
+  if (message.includes('volunteer') || message.includes('help') || message.includes('involved') || message.includes('join')) {
+    return chatbotKnowledge.volunteer;
+  }
+  
+  if (message.includes('location') || message.includes('where') || message.includes('address')) {
+    return chatbotKnowledge.location;
+  }
+  
+  if (message.includes('arts') || message.includes('culture') || message.includes('debate') || message.includes('climate')) {
+    return chatbotKnowledge.programs;
+  }
+
+  if (message.includes('operation') || message.includes('hours') || message.includes('operate') || message.includes('time')) {
+    return "We operate from Monday to Friday after school hours, when learners come back for our daily activities. These include homework assistance, art, and drawing programs.";
+  }
+
+  if (message.includes('funds') || message.includes('finance') || message.includes('money') || message.includes('where to get')) {
+    return "For learners registered with us, a small fee helps cover some of the expenses. We also rely on donations from supporters to keep our programs running.";
+  }
+  
+  if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+    return "Hello! I'm Pioneer, your AI assistant for Mpumelelo Youth Movement. How can I help you today? You can ask me about our services, programs, contact information, or how to get involved! 😊";
+  }
+  
+  if (message.includes('thank') || message.includes('thanks')) {
+    return "You're welcome! I'm here to help. Feel free to ask me anything else about Mpumelelo Youth Movement or our programs! 😊";
+  }
+  
+  if (message.includes('donate') || message.includes('donation')) {
+    return "Thank you for your interest in donating! You can support us through financial donations or by contributing items like stationery and cleaning materials. Please contact us at mymovementsa@gmail.com or +27 60 439 4410 for donation details.";
+  }
+  
+  // Default response
+  return "I'd be happy to help! You can ask me about our services, programs, contact information, how to volunteer, our contributors, location, or anything else about Mpumelelo Youth Movement. What would you like to know?";
+}
 
     // Keyboard navigation for accessibility
     document.addEventListener('keydown', function(e) {
