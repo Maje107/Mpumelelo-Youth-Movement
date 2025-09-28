@@ -800,15 +800,95 @@
       .hero-content p {
         font-size: 1.1rem;
       }
+  .about-section {
+      position: relative; /* Added this for arrow positioning */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 80px 20px; /* Added more padding for arrows */
+      min-height: 500px;
+      background: #f9f9f9;
+    }
 
-      .about-card {
-        padding: 2rem;
-      }
+    .about-card {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-width: 600px;
+      text-align: center;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.8s ease;
+      flex: 1 1 300px;
+      max-width: 400px;
+      margin: 0 auto;
+      display: none; /* Hide all cards by default */
+    }
 
-      .about-card h2 {
-        font-size: 2rem;
-      }
+    .about-card.active {
+      opacity: 1;
+      transform: translateX(0);
+      display: block; /* Show active card */
+    }
 
+    .about-card h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .about-card .underline {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: block;
+      width: 100px;
+      height: 3px;
+      margin: 1rem auto;
+    }
+
+    .about-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #666;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .arrow.left {
+      left: 2rem;
+    }
+
+    .arrow.right {
+      right: 2rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
       .arrow {
         width: 40px;
         height: 40px;
@@ -820,6 +900,27 @@
 
       .arrow.right {
         right: 1rem;
+      }
+
+      .about-card {
+        padding: 2rem;
+      }
+
+      .about-card h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .about-section {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .about-card {
+        width: 90%;
+        max-width: 350px;
       }
 
       .contact-container {
@@ -878,9 +979,312 @@
     justify-content: center;
     align-items: center;
   }
+}
+ .about-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 80px 20px 20px;
+      overflow: hidden;
+    }
 
-  .about-card {
-    width: 90%;   /* almost full width */
-    max-width: 350px;
-  }
+    .about-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-cards-container {
+      position: relative;
+      width: 100%;
+      height: 400px; /* Fixed height to prevent layout shifts */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      text-align: center;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      visibility: hidden;
+    }
+
+    .about-card.active {
+      opacity: 1;
+      transform: translateX(0);
+      visibility: visible;
+      z-index: 2;
+    }
+
+    .about-card.prev {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+
+    .about-card.next {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+
+    .about-card h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .underline {
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      margin: 1rem auto;
+    }
+
+    .about-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #666;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Arrow Buttons */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      z-index: 10;
+      font-size: 18px;
+    }
+
+    .arrow:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      color: #667eea;
+    }
+
+    .arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .arrow.left {
+      left: -25px;
+    }
+
+    .arrow.right {
+      right: -25px;
+    }
+
+    /* Navigation Dots */
+    .about-dots {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(102, 126, 234, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .dot:hover {
+      background: rgba(102, 126, 234, 0.6);
+      transform: scale(1.1);
+    }
+
+    .dot.active {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      transform: scale(1.2);
+      border-color: white;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 4px;
+      background: rgba(102, 126, 234, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 2px;
+      transition: width 0.8s ease;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-section {
+        padding: 60px 15px 80px;
+      }
+
+      .about-carousel {
+        max-width: 100%;
+      }
+
+      .about-cards-container {
+        height: auto;
+        min-height: 350px;
+      }
+
+      .about-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .about-card h2 {
+        font-size: 2rem;
+      }
+
+      .about-card p {
+        font-size: 1rem;
+      }
+
+      .arrow {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+      }
+
+      .arrow.left {
+        left: -20px;
+      }
+
+      .arrow.right {
+        right: -20px;
+      }
+
+      .about-dots {
+        bottom: -40px;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+      }
+
+      .progress-bar {
+        width: 150px;
+        bottom: -20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-section {
+        padding: 40px 10px 60px;
+      }
+
+      .about-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .about-card h2 {
+        font-size: 1.8rem;
+      }
+
+      .about-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+
+      .arrow.left {
+        left: -15px;
+      }
+
+      .arrow.right {
+        right: -15px;
+      }
+
+      .underline {
+        width: 80px;
+      }
+    }
+
+    /* Touch Support for Mobile */
+    @media (max-width: 768px) {
+      .about-cards-container {
+        touch-action: pan-x;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .about-section {
+      animation: fadeInUp 1s ease-out;
+    }
+
+    /* Demo styles for context */
+    .demo-header {
+      text-align: center;
+      padding: 2rem;
+      background: #333;
+      color: white;
+    }
+
+    .demo-footer {
+      text-align: center;
+      padding: 2rem;
+      background: #333;
+      color: white;
+    }
 }
