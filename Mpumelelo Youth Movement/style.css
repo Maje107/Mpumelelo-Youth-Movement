@@ -189,12 +189,14 @@
 
     /* About Section */
     .about-section {
-        display: flex;
-  justify-content: center;   /* center horizontally */
-  align-items: center;       /* center vertically (optional) */
-  flex-wrap: wrap;           /* allow wrapping on small screens */
-  gap: 20px;                 /* spacing between cards */
-  padding: 20px;
+     position: relative; /* Add this to contain the arrows */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 80px 20px; /* Increased padding for arrows */
+    min-height: 500px; /* Ensure enough height */
     }
 
     .about-card {
@@ -237,7 +239,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: black;
+      background:rgba(102,126,234,0.3);
       border: none;
       border-radius: 50%;
       width: 50px;
@@ -1287,4 +1289,33 @@
       background: #333;
       color: white;
     }
+    @media (max-width: 768px) {
+    .arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .arrow.left {
+        left: 1rem;
+    }
+
+    .arrow.right {
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .arrow {
+        width: 35px;
+        height: 35px;
+    }
+
+    .arrow.left {
+        left: 0.5rem;
+    }
+
+    .arrow.right {
+        right: 0.5rem;
+    }
+}
 }

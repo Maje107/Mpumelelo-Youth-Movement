@@ -367,30 +367,33 @@
     }
 
     // About section carousel
-    let currentAbout = 0;
-    const aboutCards = document.querySelectorAll('.about-card');
-    
-    function updateAboutCards() {
-      aboutCards.forEach((card, idx) => {
+   let currentAbout = 0;
+const aboutCards = document.querySelectorAll('.about-card');
+
+function updateAboutCards() {
+    aboutCards.forEach((card, idx) => {
         card.classList.remove('active');
         if (idx === currentAbout) {
-          card.classList.add('active');
+            card.classList.add('active');
         }
-      });
-    }
-    
-    function nextAbout() {
-      currentAbout = (currentAbout + 1) % aboutCards.length;
-      updateAboutCards();
-    }
-    
-    function prevAbout() {
-      currentAbout = (currentAbout - 1 + aboutCards.length) % aboutCards.length;
-      updateAboutCards();
-    }
+    });
+}
 
-    // Auto about carousel
-    setInterval(nextAbout, 12000);
+function nextAbout() {
+    currentAbout = (currentAbout + 1) % aboutCards.length;
+    updateAboutCards();
+}
+
+function prevAbout() {
+    currentAbout = (currentAbout - 1 + aboutCards.length) % aboutCards.length;
+    updateAboutCards();
+}
+
+// Remove the auto carousel interval (no automatic changing)
+// setInterval(nextAbout, 12000); // Remove or comment this line
+
+// Initialize the first card
+updateAboutCards();
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav ul li a[href^="#"]').forEach(link => {
